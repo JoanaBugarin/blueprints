@@ -1,0 +1,15 @@
+<div class="input-group">
+    <div class="input-group d-flex flex-row justify-content-center">
+        <div class="input-group-prepend">
+            <button class="btn btn-success btn-sm" (click)="disminuir()">-</button>
+        </div>
+        <input 
+            type="text" 
+            class="text-center"
+            [(ngModel)]="quantity"
+            (keyup)="onCambioCant($event)">
+        <div class="input-group-append">
+            <button class="btn btn-success btn-sm" (click)="aumentar()">+</button>
+        </div>
+    </div>
+</div>

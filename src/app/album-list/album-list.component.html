@@ -1,0 +1,45 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Descripción</th>
+            <th>Stock</th>
+            <th>Imagen</th>
+            <th>Compra</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (album of albums; track album.nombre) {
+            <tr [ngClass]="{'oferta-b': album.oferta}">
+                <td class="td-name" [ngClass]="{'oferta': album.oferta}">
+                    <h2>{{album.nombre}}</h2>
+                </td>
+                <td>{{album.precio | currency}}</td>
+                <td>{{album.descripcion}}</td>
+                @if (album.stock > 0) {
+                    <td>{{album.stock}}</td>
+                } @else {
+                    <td><span class="badge bg-warning text-dark">SIN STOCK</span></td>
+                }
+                <td><img [src]="album.imagen" [alt]="album.nombre"/></td>
+                <td class="td-compra">
+                    <span class="d-flex flex-column">
+                        @if (album.stock) {
+                            <app-input-integer 
+                            [(quantity)]="album.cantidad" 
+                            [max]="album.stock" 
+                            (maxReached)="maxReached($event)">
+                            </app-input-integer>
+                            <button class="btn btn-success mt-1" (click)="addToCart(album)">Comprar</button>
+                        }
+                    </span>
+                </td>
+            </tr>
+        } @empty {
+            <tr>
+                <td colspan="4">No hay álbumes para mostrar</td>
+            </tr>
+        }
+    </tbody>
+</table>
